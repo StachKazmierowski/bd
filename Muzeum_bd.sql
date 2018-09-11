@@ -21,12 +21,12 @@ CREATE TABLE Artysta (
 -- Table: Eksponat
 CREATE TABLE Eksponat (
     id serial  PRIMARY KEY,
-    tytuł varchar(40)  NOT NULL,
+    tytul varchar(40)  NOT NULL,
     typ varchar(15)  NOT NULL,
     wysokosc int  NOT NULL,
     szerokosc int  NOT NULL,
     waga int  NOT NULL,
-    id_twórca int  REFERENCES Artysta,
+    id_tworca int  REFERENCES Artysta,
     CONSTRAINT 	sprawdzWymiary check (wysokosc > 0 and szerokosc > 0 and waga > 0)
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE Objazd (
 CREATE TABLE Sale (
     nr serial  PRIMARY KEY,
     id_galeria int  NOT NULL REFERENCES Galeria,
-    pojemność int  NOT NULL,
+    pojemnosc int  NOT NULL,
 );
 
 

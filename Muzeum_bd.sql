@@ -1,6 +1,6 @@
 
 drop table if exists Artysta cascade;
-drop table if exists Eksponat cascade;
+drop table if exists Dzielo cascade;
 drop table if exists Ekspozycja cascade;
 drop table if exists Galerie cascade;
 drop table if exists Objazd cascade;
@@ -18,8 +18,27 @@ CREATE TABLE Artysta (
     CONSTRAINT sprawdzDaty check (rokSmierci is NULL or rokNarodzin <= rokSmierci)
 );
 
--- Table: Eksponat
-CREATE TABLE Eksponat (
+-- Table: Galerie
+CREATE TABLE Galerie (
+    id serial PRIMARY KEY,
+    nazwa varchar(30)  NOT NULL
+);
+
+-- Table: Objazd
+CREATE TABLE Objazd (
+    id serial  	PRIMARY KEY,
+    miasto varchar  NOT NULL
+);
+
+-- Table: Sale
+CREATE TABLE Sale (
+    nr serial  PRIMARY KEY,
+    id_galeria int  NOT NULL REFERENCES Galerie,
+    pojemnosc int  NOT NULL
+);
+
+-- Table: Dzielo
+CREATE TABLE Dzielo (
     id serial  PRIMARY KEY,
     tytul varchar(40)  NOT NULL,
     typ varchar(15)  NOT NULL,
@@ -33,33 +52,16 @@ CREATE TABLE Eksponat (
 -- Table: Ekspozycja
 CREATE TABLE Ekspozycja (
     id serial PRIMARY KEY,
-    id_eksponat int  NOT NULL REFERENCES Eksponat,
-    nr_sala int REFERENCES Sala,
+    id_dzielo int  NOT NULL REFERENCES Dzielo,
+    nr_sala int REFERENCES Sale,
     id_objazd int REFERENCES Objazd,
     poczatek date  NOT NULL,
     koniec date  NOT NULL,
-    CONSTRAINT sprawdzDaty (poczatek <= koniec),
-    CONSTRAINT sprawdzMiesce ((nr_sala is NULL and id_objazd is not NULL) or (nr_sala is not NULL))
+    CONSTRAINT sprawdzDaty check (poczatek <= koniec),
+    CONSTRAINT sprawdzMiesce check ((nr_sala is NULL and id_objazd is not NULL) or (nr_sala is not NULL))
 );
 
--- Table: Galerie
-CREATE TABLE Galerie (
-    id serial PRIMARY KEY,
-    nazwa varchar(30)  NOT NULL,
-);
 
--- Table: Objazd
-CREATE TABLE Objazd (
-    id serial  	PRIMARY KEY,
-    miasto varchar  NOT NULL,
-);
-
--- Table: Sale
-CREATE TABLE Sale (
-    nr serial  PRIMARY KEY,
-    id_galeria int  NOT NULL REFERENCES Galeria,
-    pojemnosc int  NOT NULL,
-);
 
 
 -- End of file.

@@ -28,6 +28,7 @@ create or replace function f2 () returns trigger as $$
         dzien date := new.poczatek;
         licznik integer;
         poj integer;
+        test integer;
         
     begin
         
@@ -37,13 +38,17 @@ create or replace function f2 () returns trigger as $$
         end if;
         
         poj := (select pojemnosc from sale where nr = new.nr_sala);
+        raise notice 'value: %', poj;
         
         loop
-            exit when dzien = new.koniec;
-            if ((select count(*) from Ekspozycja where nr_sala = new.nr_sala) >= poj)
+            exit when dzien = (select new.koniec);
+            test := (select count(*) from Ekspozycja where (nr_sala = new.nr_sala) and (poczatek <= dzien) and (koniec >= dzien));
+            if ((select count(*) from Ekspozycja where (nr_sala = new.nr_sala) and (poczatek <= dzien) and (koniec >= dzien)) >= poj)
             then
                 raise exception 'Wybrana sala jest pełna w przynajmniej jednym dniu planowanej ekspozycji';
             end if;
+            raise notice 'value: %', test;
+            raise notice 'value: %', dzien;
             dzien := (select dzien + interval '1 day');
         end loop;
         return new;
@@ -54,8 +59,11 @@ drop trigger if exists t2 on Ekspozycja;
 create trigger t2 before insert or update
     on Ekspozycja for each row
     execute procedure f2();
+    
+--co najmniej jeden eksponat artysty w muzeum    
+
         
-        
+
         
         
         

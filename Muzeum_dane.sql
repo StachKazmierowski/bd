@@ -28,3 +28,5 @@ insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) valu
 insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(3, 7, 4, NULL, '2018-01-15', '2018-10-15');
 insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(4, 1, NULL, 1, '2018-01-15', '2018-10-15');
 insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(5, 8, 2, NULL, '2018-01-15', '2018-10-15');
+
+insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(1, 4, NULL, 1, '2018-10-14', '2018-10-16');

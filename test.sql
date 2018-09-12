@@ -52,12 +52,12 @@ create or replace function f2 () returns trigger as $$
         poj := (select pojemnosc from sale where nr = new.nr_sala);
         
         loop
-            exit when dzien = (select date new.koniec);
+            exit when dzien = new.koniec;
             if ((select count(*) from Ekspozycja where nr_sala = new.nr_sala) >= poj)
             then
                 raise exception 'Wybrana sala jest pełna w przynajmniej jednym dniu planowanej ekspozycji';
             end if;
-            dzien := (select date dzien + interval '1 day');
+            dzien := (select dzien + interval '1 day');
         end loop;
         return new;
     end;

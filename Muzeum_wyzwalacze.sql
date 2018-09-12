@@ -26,8 +26,8 @@ create or replace function f2 () returns trigger as $$
     
     declare
         dzien date := new.poczatek;
-        licznik integer := 0;
-        pojemnosc integer;
+        licznik integer;
+        poj integer;
         
     begin
         
@@ -36,7 +36,24 @@ create or replace function f2 () returns trigger as $$
             return new;
         end if;
         
+        poj := (select pojemnosc from sale where nr = new.nr_sala);
         
+        loop
+            exit when dzien = new.koniec;
+            if ((select count(*) from Ekspozycja where nr_sala = new.nr_sala) >= poj)
+            then
+                raise exception 'Wybrana sala jest pełna w przynajmniej jednym dniu planowanej ekspozycji';
+            end if;
+            dzien := (select dzien + interval '1 day');
+        end loop;
+        return new;
+    end;
+$$ language plpgsql;
+
+drop trigger if exists t2 on Ekspozycja;
+create trigger t2 before insert or update
+    on Ekspozycja for each row
+    execute procedure f2();
         
         
         

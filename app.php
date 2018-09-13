@@ -1,6 +1,7 @@
 <?php
 
 switch ($-GET["tabela"]){
+    case"":
 
     echo "    <a href=\"?tabela=eksponaty\"> eksponaty </a>";
 
@@ -9,5 +10,5 @@ switch ($-GET["tabela"]){
     echo "    <a href=\"?tabela=galerie\"> galerie </a>";
     
     echo "    <a href=\"?tabela=objazdy\"> odjazdy </a>";
-    
+    break;
     }

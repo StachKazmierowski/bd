@@ -1,6 +1,6 @@
 <?php
 
-switch ($-GET["tabela"]){
+switch ($_GET["tabela"]){
     case"":
 
     echo "    <a href=\"?tabela=eksponaty\"> eksponaty </a>";

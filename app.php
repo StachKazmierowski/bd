@@ -28,25 +28,13 @@ switch ($_GET["tabela"]){
                 $tabela_id = "t_dziela";
                 echo "  <table id=\"$tabela_id\">\n";
                 echo "      <tr>\n";
-                echo "        <th onclick=\"sortTableAlphabetically('$tableId', 0)\" class=\"t_th_pointer\">tytuł</th>\n";
-                echo "        <th onclick=\"sortTableAlphabetically('$tableId', 1)\" class=\"t_th_pointer\">autor</th>\n";
-                echo "        <th onclick=\"sortTableAlphabetically('$tableId', 2)\" class=\"t_th_pointer\">typ</th>\n";
+                echo "        <th>tytuł</th>\n";
+                echo "        <th>autor</th>\n";
+                echo "        <th>typ</th>\n";
                 echo "      </tr>\n";
+                echo "      </table>";
                 
-                for ($i = 0; $i < $num; $i++) {
-                    $row = pg_fetch_array($result, $i);
-          
-                    $idd = $row["idd"];
-                    $ida = $row["ida"];
-                    echo "      <tr>\n";
-                    echo "        <td onclick=\"javascript:location.href='?table=exhibits&id=$ide'\" class=\"t_td_pointer\"><i>" . $row["tytul"] . "</i></td>\n";
-          
-                    $onclick = ($ida == "") ? ">" : " onclick=\"javascript:location.href='?table=artists&id=$ida'\" class=\"t_td_pointer\">";
-                    $str = ($ida == "") ? "-" : $row["imie"] . " " . $row["nazwisko"];
-                    echo "        <td" . $onclick . $str . "</td>\n";
-                    echo "        <td>" . $row["typ"] . "</td>\n";
-                    echo "      </tr>\n";
-                }
+
             :break
 
         }

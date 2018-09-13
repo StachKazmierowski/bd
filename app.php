@@ -14,7 +14,7 @@ switch ($_GET["tabela"]){
         echo "    <a href=\"?tabela=objazdy\"> odjazdy </a>";
     break;
 
-  case"eksponaty":
+    case"eksponaty":
         $header = "Dziela";
         echo " <div class=\header\">\n  $header\n   </div>\n\n";
         
@@ -46,7 +46,8 @@ switch ($_GET["tabela"]){
                     echo "        <td" . $onclick . $str . "</td>\n";
                     echo "        <td>" . $row["typ"] . "</td>\n";
                     echo "      </tr>\n";
-        }
+                }
+            :break
 
         }
         

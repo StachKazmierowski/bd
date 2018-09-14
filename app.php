@@ -12,6 +12,8 @@ switch ($_GET["tabela"]){
         echo "    <h4><a href=\"?tabela=galerie\"> Galerie </a></h4>";
     
         echo "    <h4><a href=\"?tabela=objazdy\"> Objazdy </a></h4>";
+
+	echo "    <h4><a href='http://students.mimuw.edu.pl/~sk372263/bd/login.php'> Dla pracowników </a></h4>";
     break;
 
     

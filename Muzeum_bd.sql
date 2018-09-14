@@ -4,6 +4,13 @@ drop table if exists Dzielo cascade;
 drop table if exists Ekspozycja cascade;
 drop table if exists Galerie cascade;
 drop table if exists Sale cascade;
+drop table if exists Users cascade;
+
+
+CREATE TABLE Users (
+    login varchar(20) NOT NULL,
+    password varchar(20) NOT NULL
+);
 
 
 -- tables

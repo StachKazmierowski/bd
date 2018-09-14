@@ -21,12 +21,11 @@ insert into Sale(nr, id_galeria, pojemnosc) values (2, 1, 5);
 insert into Sale(nr, id_galeria, pojemnosc) values (3, 2, 2);
 insert into Sale(nr, id_galeria, pojemnosc) values (4, 2, 1);
 
-insert into Objazd(id, miasto) values(1, 'Wąchock');
 
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(1, 2, 3, NULL, '2018-01-15', '2018-10-15');
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(2, 3, 3, NULL, '2018-01-15', '2018-10-15');
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(3, 7, 4, NULL, '2018-01-15', '2018-10-15');
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(4, 1, NULL, 1, '2018-01-15', '2018-10-15');
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(5, 8, 2, NULL, '2018-01-15', '2018-10-15');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(1, 2, 3, NULL, '2018-01-15', '2018-10-15');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(2, 3, 3, NULL, '2018-01-15', '2018-10-15');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(3, 7, 4, NULL, '2018-01-15', '2018-10-15');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(4, 1, NULL, 'Wąchock', '2018-01-15', '2018-10-15');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(5, 8, 2, NULL, '2018-01-15', '2018-10-15');
 
-insert into Ekspozycja(id, id_dzielo, nr_sala, id_objazd, poczatek, koniec) values(1, 4, NULL, 1, '2018-10-14', '2018-10-16');
+insert into Ekspozycja(id, id_dzielo, nr_sala, miasto, poczatek, koniec) values(1, 4, NULL, 1, '2018-10-14', '2018-10-16');

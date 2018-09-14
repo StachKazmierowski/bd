@@ -3,7 +3,6 @@ drop table if exists Artysta cascade;
 drop table if exists Dzielo cascade;
 drop table if exists Ekspozycja cascade;
 drop table if exists Galerie cascade;
-drop table if exists Objazd cascade;
 drop table if exists Sale cascade;
 
 
@@ -22,12 +21,6 @@ CREATE TABLE Artysta (
 CREATE TABLE Galerie (
     id serial PRIMARY KEY,
     nazwa varchar(30)  NOT NULL
-);
-
--- Table: Objazd
-CREATE TABLE Objazd (
-    id serial  	PRIMARY KEY,
-    miasto varchar  NOT NULL
 );
 
 -- Table: Sale
@@ -54,11 +47,11 @@ CREATE TABLE Ekspozycja (
     id serial PRIMARY KEY,
     id_dzielo int  NOT NULL REFERENCES Dzielo,
     nr_sala int REFERENCES Sale,
-    id_objazd int REFERENCES Objazd,
+    miasto varchar(20),
     poczatek date  NOT NULL,
     koniec date  NOT NULL,
     CONSTRAINT sprawdzDaty check (poczatek <= koniec),
-    CONSTRAINT sprawdzMiesce check ((nr_sala is NULL and id_objazd is not NULL) or (nr_sala is not NULL))
+    CONSTRAINT sprawdzMiesce check ((nr_sala is NULL and miasto is not NULL) or (nr_sala is not NULL))
 );
 
 

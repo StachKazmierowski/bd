@@ -51,7 +51,7 @@ CREATE TABLE Ekspozycja (
     poczatek date  NOT NULL,
     koniec date  NOT NULL,
     CONSTRAINT sprawdzDaty check (poczatek <= koniec),
-    CONSTRAINT sprawdzMiesce check ((nr_sala is NULL and id_objazd is not NULL) or (nr_sala is not NULL))
+    CONSTRAINT sprawdzMiesce check ((nr_sala is NULL and miasto is not NULL) or (nr_sala is not NULL))
 );
 
 

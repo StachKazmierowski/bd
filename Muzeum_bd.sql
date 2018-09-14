@@ -24,12 +24,6 @@ CREATE TABLE Galerie (
     nazwa varchar(30)  NOT NULL
 );
 
--- Table: Objazd
-CREATE TABLE Objazd (
-    id serial  	PRIMARY KEY,
-    miasto varchar  NOT NULL
-);
-
 -- Table: Sale
 CREATE TABLE Sale (
     nr serial  PRIMARY KEY,
@@ -54,7 +48,7 @@ CREATE TABLE Ekspozycja (
     id serial PRIMARY KEY,
     id_dzielo int  NOT NULL REFERENCES Dzielo,
     nr_sala int REFERENCES Sale,
-    id_objazd int REFERENCES Objazd,
+    miasto varchar(20),
     poczatek date  NOT NULL,
     koniec date  NOT NULL,
     CONSTRAINT sprawdzDaty check (poczatek <= koniec),

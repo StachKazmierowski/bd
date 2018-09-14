@@ -1,17 +1,17 @@
 <?php
 
-$mypassword='';
+$mypassword='lolek420';
 
 switch ($_GET["tabela"]){
     case"":
     
-        echo "    <a href=\"?tabela=dziela\"> dzieła </a>";
+        echo "    <h4><a href=\"?tabela=dziela\"> Dzieła </a></h4>";
 
-        echo "    <a href=\"?tabela=artysci\"> artyści </a>";
+        echo "    <h4><a href=\"?tabela=artysci\"> Artyści </a></h4>";
     
-        echo "    <a href=\"?tabela=galerie\"> galerie </a>";
+        echo "    <h4><a href=\"?tabela=galerie\"> Galerie </a></h4>";
     
-        echo "    <a href=\"?tabela=objazdy\"> odjazdy </a>";
+        echo "    <h4><a href=\"?tabela=objazdy\"> Objazdy </a></h4>";
     break;
 
     
@@ -130,27 +130,27 @@ break;
    break;
 
         case"objazdy":
-	$header = "Artyści";
+	$header = "Objazdy";
         echo " <h1>  $header   </h1>\n";
 	$link = pg_connect("host=labdb dbname=mrbd user=sk372263 password=$mypassword");
         
-        $result = pg_query_params($link, "select * from artysta;", array());
+        $result = pg_query_params($link, "select dzielo.tytul as tytul, ekspozycja.poczatek as poczatek, ekspozycja.koniec as koniec, ekspozycja.miasto as miasto from ekspozycja inner join dzielo on ekspozycja.id_dzielo = dzielo.id where miasto is not null and poczatek <= current_date and koniec >= current_date;", array());
 	$numrows = pg_numrows($result); 	
                 
         echo "  <table>\n";
         echo "      <tr>\n";
-        echo "        <th>Imię</th>\n";
-        echo "        <th>Nazwisko</th>\n";
-        echo "        <th>Rok narodzin</th>\n";
-        echo "        <th>Rok śmierci</th>\n";
+        echo "        <th>Dzieło</th>\n";
+        echo "        <th>Poczatek</th>\n";
+        echo "        <th>Koniec</th>\n";
+        echo "        <th>Miasto</th>\n";
         echo "      </tr>\n";
 	for($i = 0; $i < $numrows; $i++){
 		echo "<tr>";
 		$row = pg_fetch_array($result, $i);
-		echo " <td> " . $row["imie"] .  "</td>";
-		echo " <td> " . $row["nazwisko"] . "</td>";
-		echo " <td> " . $row["roknarodzin"] . "</td>";
-		echo " <td> " . $row["roksmierci"] . "</td>";
+		echo " <td> " . $row["tytul"] .  "</td>";
+		echo " <td> " . $row["poczatek"] . "</td>";
+		echo " <td> " . $row["koniec"] . "</td>";
+		echo " <td> " . $row["miasto"] . "</td>";
 		echo "</tr>";
 	}
 

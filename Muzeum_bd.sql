@@ -3,7 +3,6 @@ drop table if exists Artysta cascade;
 drop table if exists Dzielo cascade;
 drop table if exists Ekspozycja cascade;
 drop table if exists Galerie cascade;
-drop table if exists Objazd cascade;
 drop table if exists Sale cascade;
 
 

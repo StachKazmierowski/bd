@@ -55,22 +55,7 @@ create trigger t2 before insert or update
     on Ekspozycja for each row
     execute procedure f2();
     
-create or replace function f3() returns trigger as $$
 
-    begin 
-        if((select count(*) from Ekspozycja where id_objazd = new.id) != 1)
-        then
-            raise exception 'Objazd nie może zostać ogłoszony, gdyż nie ma go w ekspozycjach. Dodaj odpowiednią ekspozycję, aby ogłosić objazd';
-        end if;
-        return new;
-    end;
-$$ language plpgsql;
-
-drop trigger if exists t3 on Objazd;
-create trigger t3 before insert or update
-    on objazd for each row
-    execute procedure f3();
-        
         
         
         

@@ -1,6 +1,6 @@
 <?php
 
-$mypassword='lolek420';
+$mypassword='';
 
 switch ($_GET["tabela"]){
     case"":

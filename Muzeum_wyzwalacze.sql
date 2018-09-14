@@ -31,7 +31,7 @@ create or replace function f2 () returns trigger as $$
         
     begin
         
-        if (new.id_objazd is not null)
+        if (new.miasto is not null)
         then
             return new;
         end if;

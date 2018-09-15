@@ -15,7 +15,7 @@ switch ($_GET["tabela"]){
     
         echo "    <h4><a href=\"?tabela=galerie\"> Galerie </a></h4>";
     
-        echo "    <h4><a href=\"?tabela=objazdy\"> Objazdy </a></h4>";
+        echo "    <h4><a href=\"?tabela=ekspozycje\"> Ekspozycje </a></h4>";
 
 	echo "    <h4><a href='http://students.mimuw.edu.pl/~sk372263/bd/login.php'> Dla pracowników </a></h4>";
     break;
@@ -267,17 +267,20 @@ else {
 	}
    break;
 
-        case"objazdy":
-	$header = "Objazdy";
+        case"ekspozycje":
+	$header = "ekspozycje";
         echo " <h1>  $header   </h1>\n";
 	$link = pg_connect("host=labdb dbname=mrbd user=sk372263 password=$mypassword");
         
-        $result = pg_query_params($link, "select dzielo.tytul as tytul, ekspozycja.poczatek as poczatek, ekspozycja.koniec as koniec, ekspozycja.miasto as miasto from ekspozycja inner join dzielo on ekspozycja.id_dzielo = dzielo.id where miasto is not null and poczatek <= current_date and koniec >= current_date;", array());
+        $result = pg_query_params($link, "select dzielo.tytul as tytul, dzielo.id as idd, ekspozycja.nr_sala as nrs, ekspozycja.id as ide, ekspozycja.poczatek as poczatek, ekspozycja.koniec as koniec, ekspozycja.miasto as miasto from ekspozycja inner join dzielo on ekspozycja.id_dzielo = dzielo.id;", array());
 	$numrows = pg_numrows($result); 	
                 
         echo "  <table>\n";
         echo "      <tr>\n";
-        echo "        <th>Dzieło</th>\n";
+        echo "        <th>id Ekspozycji,</th>\n";
+        echo "        <th>id Dzieła,</th>\n";	
+        echo "        <th>Nazwa dzieła,</th>\n";
+        echo "        <th>nr Sali,</th>\n";
         echo "        <th>Poczatek</th>\n";
         echo "        <th>Koniec</th>\n";
         echo "        <th>Miasto</th>\n";
@@ -285,7 +288,10 @@ else {
 	for($i = 0; $i < $numrows; $i++){
 		echo "<tr>";
 		$row = pg_fetch_array($result, $i);
-		echo " <td> " . $row["tytul"] .  "</td>";
+		echo " <td> " . $row["ide"] .  "</td>";
+		echo " <td> " . $row["idd"] .  "</td>";
+		echo " <td> " . $row["tytul"] . "</td>";
+		echo " <td> " . $row["nrs"] . "</td>";
 		echo " <td> " . $row["poczatek"] . "</td>";
 		echo " <td> " . $row["koniec"] . "</td>";
 		echo " <td> " . $row["miasto"] . "</td>";
@@ -293,6 +299,41 @@ else {
 	}
 
         echo "  </table>\n";
+
+
+		echo " <form action='http://students.mimuw.edu.pl/~sk372263/bd/appadmin.php?tabela=ekspozycje' method='post'>\n";
+		echo " <div class='container'>\n";
+
+    		echo " <label for='id'><b>id</b></label>\n";
+    		echo " <input type='text' name='id' required>\n";
+	
+    		echo " <label for='imie'><b>id dzieła</b></label>\n";
+    		echo " <input type='text' name='idd' required>\n";
+
+    		echo " <label for='nazwisko'><b>nr sali</b></label>\n";
+    		echo " <input type='text' name='nrs'>\n";
+
+    		echo " <label for='rok narodzin'><b>miasto</b></label>\n";
+    		echo " <input type='text' name='miasto' required>\n";
+
+    		echo " <label for='rok smierci'><b>poczatek</b></label>\n";
+    		echo " <input type='date' name='poczatek' required>\n";
+
+    		echo " <label for='rok smierci'><b>koniec</b></label>\n";
+    		echo " <input type='date' name='koniec' required>\n";
+
+		echo " <input type=\"submit\" name=\"button\" value=\"Dodaj\">\n";
+  		echo " </div>\n";
+		echo " </form>\n";
+
+		$id=$_POST["id"];
+		$idd=$_POST["idd"];
+		$nrs=$_POST["nrs"];
+		$miasto=$_POST["miasto"];
+		$poczatek=$_POST["poczatek"];
+		$koniec=$_POST["koniec"];
+
+		$wynik = pg_query_params($link, "INSERT INTO ekspozycja VALUES ($1,$2,$3,$4,$5,$6);",array($id,$idd,$nrs,pg_escape_string($miasto),pg_escape_string($poczatek),pg_escape_string($koniec)));
         break;
     }
 

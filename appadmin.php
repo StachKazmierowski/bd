@@ -53,8 +53,9 @@ switch ($_GET["tabela"]){
 			echo " <td> " . $row["typ"] . "</td>";
 			echo "</tr>";
 		}
-		
 
+		
+	if(isset($_COOKIE[$cookie_name])){
 		echo " <form action='http://students.mimuw.edu.pl/~sk372263/bd/appadmin.php?tabela=dziela' method='post'>\n";
 		echo " <div class='container'>\n";
 
@@ -93,7 +94,7 @@ switch ($_GET["tabela"]){
 
 		$wynik = pg_query_params($link, "INSERT INTO dzielo VALUES ($1,$2,$3,$4,$5,$6,$7);",array($id,pg_escape_string($nazwa),pg_escape_string($typ),$wysokosc,$szerokosc,$waga,$id_tworca));
 
-
+	}
 
 
 
@@ -223,14 +224,7 @@ else {
 		$nazwa=$_POST["nazwa"];
 
 		$wynik = pg_query_params($link, "INSERT INTO galerie VALUES ($1,$2);",array($id,pg_escape_string($nazwa)));
-		if ($wynik) {
-			echo "OK";
-		}
-		else {
-			echo "Błąd, nie dodano eksponatu";
-		}
-		$nazwa=0;
-
+		
 
 
 	    break;
@@ -314,7 +308,7 @@ else {
     		echo " <input type='text' name='nrs'>\n";
 
     		echo " <label for='rok narodzin'><b>miasto</b></label>\n";
-    		echo " <input type='text' name='miasto' required>\n";
+    		echo " <input type='text' name='miasto'>\n";
 
     		echo " <label for='rok smierci'><b>poczatek</b></label>\n";
     		echo " <input type='date' name='poczatek' required>\n";
@@ -333,7 +327,8 @@ else {
 		$poczatek=$_POST["poczatek"];
 		$koniec=$_POST["koniec"];
 
-		$wynik = pg_query_params($link, "INSERT INTO ekspozycja VALUES ($1,$2,$3,$4,$5,$6);",array($id,$idd,$nrs,pg_escape_string($miasto),pg_escape_string($poczatek),pg_escape_string($koniec)));
+		$wynik = pg_query_params($link, "INSERT INTO ekspozycja VALUES ($1,$2,$3,$4,$5,$6);",array($id,$idd,$nrs,pg_escape_string($miasto),pg_escape_string($poczatek),pg_escape_($koniec)));
+
         break;
     }
 
